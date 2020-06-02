@@ -1,0 +1,50 @@
+<scene version="2.1.0">
+
+    <integrator type="pathreparam">
+        <integer name="max_depth" value="2"/>
+    </integrator>
+
+    <sensor type="perspective">
+        <transform name="to_world">
+            <lookat origin="0.0, -1.0, 3.0"
+                    target="0.0, 0.0, 0.0"
+                    up="0.0, 1.0, 0.0"/>
+        </transform>
+
+        <float name="fov" value="40"/>
+
+        <film type="hdrfilm">
+            <string name="pixel_format" value="rgb"/>
+            <integer name="width" value="256"/>
+            <integer name="height" value="256"/>
+        </film>
+
+        <sampler type="independent">
+            <integer name="sample_count" value="8"/>
+        </sampler>
+    </sensor>
+
+    <shape type="rectangle" id="lightsource">
+        <transform name="to_world">
+            <scale value="0.025"/>
+            <rotate x="1" angle="180"/>
+            <translate x="-1.0" y="3.0" z="3.0"/>
+        </transform>
+
+        <emitter type="smootharea">
+            <rgb name="radiance" value="8000.0"/>
+        </emitter>
+    </shape>
+
+    <shape type="ply" id="grid_mesh">
+        <string name="filename" value="grid_256.ply"/>
+
+        <bsdf type="roughconductor">
+            <string name="distribution" value="beckmann"/>
+            <float name="alpha_u" value="0.15"/>
+            <float name="alpha_v" value="0.15"/>
+            <string name="material" value="Cu"/>
+        </bsdf>
+    </shape>
+
+</scene>
